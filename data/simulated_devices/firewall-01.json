@@ -1,0 +1,35 @@
+{
+  "device_id": "firewall-01",
+  "device_type": "firewall",
+  "hostname": "FW-EDGE-01",
+  "location": "虚构演示机房 A",
+  "interfaces": [
+    {
+      "name": "eth0",
+      "admin_status": "up",
+      "oper_status": "up",
+      "speed": "1000Mbps",
+      "description": "Untrust zone",
+      "vlan": null
+    },
+    {
+      "name": "eth1",
+      "admin_status": "up",
+      "oper_status": "up",
+      "speed": "1000Mbps",
+      "description": "Trust zone",
+      "vlan": null
+    }
+  ],
+  "vlans": [],
+  "routes": [
+    {
+      "destination": "0.0.0.0",
+      "mask": "0.0.0.0",
+      "next_hop": "203.0.113.1",
+      "interface": "eth0",
+      "protocol": "static",
+      "metric": 1
+    }
+  ]
+}

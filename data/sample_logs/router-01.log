@@ -1,0 +1,7 @@
+2026-03-01T08:10:10Z INFO RTR-EDGE-01 OSPF neighbor 10.10.10.2 state changed to FULL
+2026-03-01T09:45:55Z WARNING RTR-EDGE-01 Interface GigabitEthernet0/0 packet loss detected (2%)
+2026-03-01T10:15:33Z INFO RTR-EDGE-01 Default route via 203.0.113.1 is reachable
+2026-03-01T12:22:07Z ERROR RTR-EDGE-01 NAT translation table 90% full
+2026-03-01T12:22:30Z WARNING RTR-EDGE-01 NAT translation table 95% full
+2026-03-01T12:25:00Z INFO RTR-EDGE-01 NAT translation table pressure recovered
+2026-03-01T18:00:00Z INFO RTR-EDGE-01 Configuration saved
