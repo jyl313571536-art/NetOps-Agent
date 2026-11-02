@@ -34,7 +34,7 @@ class Settings(BaseSettings):
     # 网络诊断安全限制
     # 注意：当前默认放开目标白名单（diag_allow_all_targets=True），
     # 仅做输入格式校验，不做目标范围限制。详见 README 安全警示。
-    diag_allow_all_targets: bool = True
+    diag_allow_all_targets: bool = False
     diag_allowed_targets: str = "localhost,127.0.0.1,::1"
     diag_timeout: float = 10.0
 
