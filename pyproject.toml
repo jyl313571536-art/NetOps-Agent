@@ -1,0 +1,59 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "netops-agent"
+version = "0.1.0"
+description = "AI Network Operations & Troubleshooting Agent"
+requires-python = ">=3.13"
+dependencies = [
+    "langgraph",
+    "langchain-core",
+    "langchain-openai",
+    "fastapi",
+    "pydantic>=2",
+    "pydantic-settings",
+    "python-dotenv",
+    "httpx",
+    "uvicorn",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "ruff",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py313"
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle errors
+    "F",  # pyflakes
+    "I",  # isort
+    "UP",  # pyupgrade
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "unit: 单元测试",
+    "integration: 集成测试",
+    "real_api: 真实 MiMo API 测试，需要 API Key，单独运行",
+]
+
+[tool.coverage.run]
+source = ["app"]
+branch = true
+omit = ["*/__init__.py"]
+
+[tool.coverage.report]
+show_missing = true
+skip_empty = true
