@@ -196,7 +196,7 @@ Copy-Item .env.example .env         # PowerShell
 
 安全说明：
 
-- **⚠️ 当前默认放开诊断目标白名单**（`DIAG_ALLOW_ALL_TARGETS=true`），可对任意 IP 执行 Ping / DNS / Traceroute / TCP 端口检测。仅限**受控测试环境**使用；请勿对未授权的网络、主机或设备执行扫描（未经授权的网络扫描在多数地区属违法行为）。如需恢复白名单防护，设置 `DIAG_ALLOW_ALL_TARGETS=false` 并配置 `DIAG_ALLOWED_TARGETS`。
+- **⚠️ 当前默认放开诊断目标白名单**，可对任意 IP 执行 Ping / DNS / Traceroute / TCP 端口检测。仅限**受控测试环境**使用；请勿对未授权的网络、主机或设备执行扫描（未经授权的网络扫描在多数地区属违法行为）。如需恢复白名单防护，设置 `DIAG_ALLOW_ALL_TARGETS=false` 并配置 `DIAG_ALLOWED_TARGETS`。
 - 所有命令使用固定参数列表，不拼接 Shell（`shell=False`）。
 - 备用模型：`mimo-v2.6-flash`。
 - 按量付费 Base URL 为 `https://api.xiaomimimo.com/v1`；使用 Token Plan 时以控制台提供的专属 Base URL 和 Key 为准。
