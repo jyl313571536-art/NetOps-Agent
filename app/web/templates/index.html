@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NetOps Agent 测试控制台</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>NetOps Agent 测试控制台</h1>
+    <nav id="nav">
+      <button class="nav-btn active" data-page="dashboard">Dashboard</button>
+      <button class="nav-btn" data-page="chat">Agent Chat</button>
+      <button class="nav-btn" data-page="diagnostics">Network Diagnostics</button>
+      <button class="nav-btn" data-page="knowledge">Knowledge Base</button>
+      <button class="nav-btn" data-page="history">History</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Dashboard -->
+    <section id="page-dashboard" class="page active">
+      <h2>Dashboard</h2>
+      <p class="hint">展示 API、MiMo、RAG、SQLite 状态（数据来自后端接口）。</p>
+      <div class="cards" id="dashboard-cards">
+        <div class="card"><h3>API</h3><p id="ds-api">加载中...</p></div>
+        <div class="card"><h3>MiMo 模型</h3><p id="ds-model">加载中...</p></div>
+        <div class="card"><h3>RAG 知识库</h3><p id="ds-rag">加载中...</p></div>
+        <div class="card"><h3>SQLite 诊断记录</h3><p id="ds-history">加载中...</p></div>
+      </div>
+    </section>
+
+    <!-- Agent Chat -->
+    <section id="page-chat" class="page">
+      <h2>Agent Chat</h2>
+      <p class="hint">自然语言提问，调用 <code>POST /api/v1/agent/chat</code> 完整诊断工作流。</p>
+      <form id="chat-form">
+        <textarea id="chat-message" rows="3"
+          placeholder="例如：我的电脑可以 Ping 通网关，但是无法访问互联网"></textarea>
+        <button type="submit" id="chat-submit">发送</button>
+      </form>
+      <p id="chat-progress" class="hint" hidden></p>
+      <div id="chat-error" class="error-box" hidden></div>
+      <div id="chat-result" class="result-box" hidden>
+        <p><strong>诊断状态：</strong><span id="chat-status" class="badge"></span></p>
+        <p><strong>回答：</strong><span id="chat-answer"></span></p>
+        <div id="chat-tools-wrap" hidden>
+          <strong>工具执行结果：</strong>
+          <ul id="chat-tools"></ul>
+        </div>
+        <div id="chat-citations-wrap" hidden>
+          <strong>知识引用：</strong>
+          <ul id="chat-citations"></ul>
+        </div>
+        <div id="chat-steps-wrap" hidden>
+          <strong>下一步建议：</strong>
+          <ul id="chat-steps"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Network Diagnostics -->
+    <section id="page-diagnostics" class="page">
+      <h2>Network Diagnostics</h2>
+      <p class="hint">
+        调用已实现的网络诊断接口。结果来源标记：
+        <code>local_diagnostic</code>（本机真实检测）/
+        <code>simulation</code>（模拟设备虚构数据）。
+      </p>
+      <form id="diag-form">
+        <label>工具
+          <select id="diag-tool"></select>
+        </label>
+        <div id="diag-fields"></div>
+        <button type="submit" id="diag-submit">执行</button>
+      </form>
+      <div id="diag-error" class="error-box" hidden></div>
+      <div id="diag-result" class="result-box" hidden>
+        <p><strong>来源：</strong><span id="diag-source" class="badge"></span>
+          <strong>状态：</strong><span id="diag-success" class="badge"></span></p>
+        <p><strong>摘要：</strong><span id="diag-summary"></span></p>
+        <p id="diag-error-row" hidden><strong>错误：</strong><span id="diag-error-text"></span></p>
+        <details><summary>详细数据</summary><pre id="diag-detail"></pre></details>
+      </div>
+    </section>
+
+    <!-- Knowledge Base -->
+    <section id="page-knowledge" class="page">
+      <h2>Knowledge Base</h2>
+      <p class="hint">调用已实现的 RAG 接口，展示检索片段与文档来源。</p>
+      <form id="kb-form">
+        <input type="text" id="kb-query" placeholder="例如：DNS 解析失败怎么排查">
+        <button type="submit" id="kb-submit">检索</button>
+      </form>
+      <div id="kb-error" class="error-box" hidden></div>
+      <p id="kb-status" class="hint"></p>
+      <div id="kb-results"></div>
+    </section>
+
+    <!-- History -->
+    <section id="page-history" class="page">
+      <h2>History</h2>
+      <p class="hint">展示 SQLite 中的诊断历史（数据来自后端只读接口）。</p>
+      <button id="history-refresh">刷新</button>
+      <div id="history-error" class="error-box" hidden></div>
+      <table id="history-table">
+        <thead>
+          <tr>
+            <th>时间</th><th>用户描述</th><th>分类</th>
+            <th>诊断状态</th><th>执行工具</th><th>耗时(ms)</th>
+          </tr>
+        </thead>
+        <tbody id="history-body"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <p>NetOps Agent Web 测试控制台 · 仅通过后端 API 交互 · 不泄露 API Key</p>
+  </footer>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
